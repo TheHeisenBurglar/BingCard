@@ -11,10 +11,10 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     const id = req.nextUrl.searchParams.get('id');
     const updatedCard = await bingocard.findByIdAndUpdate(id, body)
-    return NextResponse.json({success: true, data: updatedCard})
+    return NextResponse.json({ success: true, data: updatedCard })
   } catch (error: any) {
     console.error(error)
-    return NextResponse.json({success: false, error: error.message})
+    return NextResponse.json({ success: false, error: error.message })
   }
 }
 
@@ -53,12 +53,12 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    if (!session) {
+    /*if (!session) {
       return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
-    }
+    }*/
 
-    
-    const currentUser = await User.findById(session.userId).lean();
+
+    const currentUser = await User.findById(session?.userId).lean();
     console.log("CURRENT USER", currentUser)
     const friends = currentUser?.friends || [];
 
@@ -66,41 +66,41 @@ export async function GET(req: NextRequest) {
 
     if (type) {
       switch (type) {
-      case 'user':
-        query = { createdBy: session.userId };
-        break;
+        case 'user':
+          query = { createdBy: session.userId };
+          break;
 
-      case 'friends':
-        query = {
-          createdBy: { $in: friends },
-          friendsCanView: true,
-        };
-        break;
+        case 'friends':
+          query = {
+            createdBy: { $in: friends },
+            friendsCanView: true,
+          };
+          break;
 
-      case 'public':
-        query = { public: true };
-        break;
+        case 'public':
+          query = { public: true };
+          break;
 
-      case 'all':
-        query = {
-          $or: [
-            { createdBy: session.userId },
-            { public: true },
-            { createdBy: { $in: friends }, friendsCanView: true },
-          ],
-        };
-        break;
+        case 'all':
+          query = {
+            $or: [
+              { createdBy: session.userId },
+              { public: true },
+              { createdBy: { $in: friends }, friendsCanView: true },
+            ],
+          };
+          break;
 
-      default:
-        return NextResponse.json({ success: false, message: 'Invalid type' }, { status: 400 });
+        default:
+          return NextResponse.json({ success: false, message: 'Invalid type' }, { status: 400 });
       }
-    } else if(id) {
-      query = {_id: id}
+    } else if (id) {
+      query = { _id: id }
     }
 
     const cards = await bingocard.find(query)
-  .populate({ path: 'createdBy', select: 'username' })
-  .lean();
+      .populate({ path: 'createdBy', select: 'username' })
+      .lean();
 
     const cardsWithAuthor = cards.map(card => ({
       ...card,

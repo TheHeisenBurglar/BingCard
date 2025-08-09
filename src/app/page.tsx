@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [cards, setCards] = useState([]);
-  useEffect(()=> {
-    async function fetchCards(){
-      const res = await fetch('/api/bingocard?type=all');
+  useEffect(() => {
+    async function fetchCards() {
+      const res = await fetch('/api/bingocard?type=public');
       const data = await res.json();
       if (data.success) setCards(data.data)
     }
@@ -19,13 +19,13 @@ export default function Home() {
       {cards?.length === 0 ? (
         <h1 className="alert alert-error alert-outline">Welcome to GridGO!, Looks like there are no cards available... :(</h1>
       ) : (
-        <div className="space-y-2 grid gap-5">
+        <div className="mt-10 space-y-2 grid gap-5 md:grid-cols-2 md:justify-center lg:grid-cols-3 lg:justify-center">
           {cards?.map((f: any) => (
             <HomeCard
               id={f._id}
               gridSize={f.gridsize}
-              title={f.name} 
-              visibility={f.public} 
+              title={f.name}
+              visibility={f.public}
               author={f.author}
               participants={f.participants}
               slotEntries={f.slotEntries}

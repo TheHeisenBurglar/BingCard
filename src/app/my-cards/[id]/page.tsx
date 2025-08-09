@@ -40,7 +40,7 @@ const renderGridPreview = () => {
           }`}
           onClick={() => handleSetStatus(i, true)}
         >
-          <p className="text-center text-[min(3.25vw,0.75rem)] leading-tight p-1 break-words w-full h-full flex items-center justify-center text-wrap">
+          <p className="text-center text-[min(2vw,0.75rem)] leading-tight p-1 break-words w-full h-full flex items-center justify-center text-wrap">
             {card?.slotEntries[i].text}
           </p>
         </div>
