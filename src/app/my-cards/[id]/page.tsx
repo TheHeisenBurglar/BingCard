@@ -33,10 +33,10 @@ const renderGridPreview = () => {
           key={i}
           className={`aspect-square border border-gray-400 flex justify-center items-center overflow-hidden ${
             i === centerIndex
-              ? "bg-secondary pointer-events-none"
+              ? "bg-primary text-accent pointer-events-none"
               : card.slotEntries[i].status
-              ? "bg-green-400 text-secondary"
-              : "bg-white hover:bg-primary hover:cursor-pointer hover:text-white text-primary"
+              ? "bg-primary text-accent"
+              : "bg-accent text-primary hover:bg-secondary hover:cursor-pointer hover:text-white"
           }`}
           onClick={() => handleSetStatus(i, true)}
         >

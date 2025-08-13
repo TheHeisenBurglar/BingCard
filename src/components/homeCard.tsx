@@ -14,10 +14,10 @@ export default function HomeCard({ id, gridSize, title, visibility, author, part
             <div
               key={i}
               className={`aspect-square border flex justify-center items-center border-gray-400 ${i === centerIndex
-                ? 'bg-secondary'
+                ? 'bg-primary text-accent'
                 : slotEntries[i].status === true
-                  ? 'bg-green-400 text-secondary'
-                  : 'bg-white text-primary'
+                  ? 'bg-primary text-accent'
+                  : 'bg-accent text-primary'
                 }`}
             >
               <p className="font-mono text-center text-[min(2vw,0.65rem)] leading-tight p-1 break-words w-full h-full overflow-hidden flex items-center justify-center text-wrap">
