@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export default function cardPage() {
   const params = useParams();
   const { id } = params;
-  const [card, setCard] = useState();
+  const [card, setCard] = useState<any>();
   useEffect(() => {
     async function fetchCard() {
       const res = await fetch(`/api/bingocard?id=${id}`);
@@ -17,7 +17,8 @@ export default function cardPage() {
   }, []);
   
 const renderGridPreview = () => {
-  const gridSize = card?.gridsize;
+  const gridSize = card.gridsize;
+  
   const dim = Math.sqrt(gridSize);
   const centerIndex = gridSize % 2 === 1 ? Math.floor(gridSize / 2) : -1;
 
@@ -34,7 +35,7 @@ const renderGridPreview = () => {
           className={`aspect-square border border-gray-400 flex justify-center items-center overflow-hidden ${
             i === centerIndex
               ? "bg-primary text-accent pointer-events-none"
-              : card.slotEntries[i].status
+              : card?.slotEntries[i].status
               ? "bg-primary text-accent"
               : "bg-accent text-primary hover:bg-secondary hover:cursor-pointer hover:text-white"
           }`}
@@ -55,7 +56,7 @@ const renderGridPreview = () => {
 
     const updatedCard = {
       ...card,
-      slotEntries: card.slotEntries.map((slot, i) =>
+      slotEntries: card.slotEntries.map((slot: any, i: number) =>
         i === index ? { ...slot, status } : slot
       ),
     };

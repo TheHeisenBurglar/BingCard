@@ -4,7 +4,7 @@ import HomeCard from "@/components/homeCard";
 import { useEffect, useState } from "react";
 
 export default function MyCardsPage() {
-  const [cards, setCards] = useState()
+  const [cards, setCards] = useState<any>()
 
   useEffect(() => {
     async function fetchCards() {

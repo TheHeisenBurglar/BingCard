@@ -3,7 +3,6 @@ import bingocard from '@/app/models/bingocard';
 import User from '@/app/models/user';
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/app/lib/session.server';
-import user from '@/app/models/user';
 
 export async function PUT(req: NextRequest) {
   await dbConnect();
@@ -58,13 +57,13 @@ export async function GET(req: NextRequest) {
     }*/
 
 
-    const currentUser = await User.findById(session?.userId).lean();
+    const currentUser = await User.findById(session?.userId);
     console.log("CURRENT USER", currentUser)
     const friends = currentUser?.friends || [];
 
     let query = {};
 
-    if (type) {
+    if (type && session) {
       switch (type) {
         case 'user':
           query = { createdBy: session.userId };

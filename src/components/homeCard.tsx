@@ -1,5 +1,5 @@
 import "@/app/globals.css";
-export default function HomeCard({ id, gridSize, title, visibility, author, participants, slotEntries }: { id: string, gridSize: any, title: string, visibility: string, author: string, participants: [string] }) {
+export default function HomeCard({ id, gridSize, title, visibility, author, participants, slotEntries }: { id: string, gridSize: any, title: string, visibility: string, author: string, participants: [string], slotEntries: [{slot: number, text: string, photo: string, status: boolean}] }) {
   const renderGridPreview = () => {
     const dim = Math.sqrt(gridSize);
     const centerIndex = gridSize % 2 === 1 ? Math.floor(gridSize / 2) : -1; // Only works for odd-sized square grids

@@ -42,11 +42,15 @@ export async function getSession(): Promise<SessionPayload | null> {
     const { userId, username } = payload as SessionPayload;
 
     return {
-      userId: typeof userId === 'object' && 'toString' in userId
-        ? userId.toString()
-        : String(userId),
+      userId:
+        typeof userId === 'string'
+          ? userId
+          : userId && typeof (userId as any).toString === 'function'
+          ? (userId as any).toString()
+          : String(userId),
       username: String(username),
     };
+
   } catch (err) {
     return null;
   }
