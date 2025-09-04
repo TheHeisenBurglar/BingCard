@@ -17,6 +17,7 @@ export default function cardPage() {
   }, []);
   
 const renderGridPreview = () => {
+  if (!card) return null;
   const gridSize = card.gridsize;
   
   const dim = Math.sqrt(gridSize);
