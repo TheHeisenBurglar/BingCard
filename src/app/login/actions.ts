@@ -27,13 +27,14 @@ export async function login(_: FormState, formData: FormData) {
   const user = await User.findOne({ username });
 
   if (!user) {
-    return { message: 'Invalid username or password 1' };
+    // console.log("username does not exist in database")
+    return { message: 'Password or Username is incorrect.' };
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    console.log(user.password, password)
-    return { message: 'Invalid username or password 2' };
+    // console.log("Passwords do not match")
+    return { message: 'Password or Username is incorrect.' };
   }
 
   const token = await new SignJWT({

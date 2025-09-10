@@ -17,7 +17,7 @@ export default async function RootLayout({
   const session = await getSession();
   return (
     <html lang="en">
-      <body className="bg-base-100 h-100dvh pb-10 min-h-dvh">
+      <body className="bg-base-200 h-100dvh pb-10 min-h-dvh">
         <div className="navbar bg-base-100 shadow-sm">
           <div className="flex-1">
             <Link href="/" className={`btn btn-ghost btn-circle px-15 ${jersey.className} text-3xl p-2`}>GRIDGO</Link>
@@ -33,11 +33,11 @@ export default async function RootLayout({
                         <path d="M4 12h16" /><path d="M4 18h16" /><path d="M4 6h16" />
                       </svg>
                     </summary>
-                    <ul className="bg-base-100 rounded-t-none p-2 absolute right-0 w-xs">
-                      <li><a href="/friends">Friends</a></li>
-                      <li><a href="/my-cards">My Cards</a></li>
-                      <li><a>Settings</a></li>
-                      <li><a href="/logout">Log Out</a></li>
+                    <ul className="bg-base-100 rounded-t-none p-2 absolute right-0 w-xs gap-1">
+                      <li><a href="/friends" className="btn  btn-soft my-2">Friends</a></li>
+                      <li><a href="/my-cards" className="btn btn-soft my-2">My Cards</a></li>
+                      <li><a className="btn btn-soft my-2">Settings</a></li>
+                      <li><a href="/logout" className="btn btn-soft my-2">Log Out</a></li>
                     </ul>
                   </details>
                 </li>
@@ -49,7 +49,7 @@ export default async function RootLayout({
         </div>
         {!session && <h1 className="alert alert-warning alert-outline">Welcome to GridGO!, get started by making an account or logging in!</h1>}
         {session && <a className="btn btn-primary btn-xl btn-circle fixed bottom-0 right-0 m-10 z-50" href="/create">+</a>}
-        {session && <h1 className="alert alert-info alert-outline">Welcome to GridGO!, get started by making some cards!</h1>}
+        {/* session && <h1 className="alert alert-info alert-outline">Welcome to GridGO!, get started by making some cards!</h1> */}
         {children}
       </body>
     </html >

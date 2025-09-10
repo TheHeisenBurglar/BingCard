@@ -9,10 +9,13 @@ export default function LoginPage() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log("State: ", state)
     if (state?.success) {
       router.push('/');
     }
   }, [state, router]);
+
+
 
   return (
     <form action={formAction} method="post" className="fieldset mt-10 bg-base-200 border-base-300 mx-auto rounded-box w-sm border p-10">
@@ -40,7 +43,7 @@ export default function LoginPage() {
       {state?.message && <p className="text-error">{state.message}</p>}
       <button className='btn btn-primary btn-soft btn-circle py-5 btn-wide mx-auto mt-5' type="submit" disabled={pending}>Log In</button>
       <h1 className='m-auto'>OR</h1>
-      <a className='btn btn-primary btn-soft btn-circle py-5 btn-wide mx-auto' href='/signup'>Sign Up</a> 
+      <a className='btn btn-primary btn-soft btn-circle py-5 btn-wide mx-auto' href='/signup'>Sign Up</a>
     </form>
   );
 }
